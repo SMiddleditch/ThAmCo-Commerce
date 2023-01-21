@@ -1,0 +1,64 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Edit Product details";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Edit Product</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="ProductPictureUrlPreview" class="border-info rounded" style="max-width: 140px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductPictureUrl" class="control-label"></label>
+                        <input asp-for="ProductPictureUrl" class="form-control" />
+                        <span asp-validation-for="ProductPictureUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductName" class="control-label"></label>
+                        <input asp-for="ProductName" class="form-control" />
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductPrice" class="control-label"></label>
+                        <input asp-for="ProductPrice" class="form-control" />
+                        <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductStock" class="control-label"></label>
+                        <input asp-for="ProductStock" class="form-control" />
+                        <span asp-validation-for="ProductStock" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProductPictureUrlPreview');
+            output.src = $("#ProductPictureUrl").val();
+        })
+        $("#ProductPictureUrl").on("change", function () {
+            var output = document.getElementById('ProductPictureUrlPreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
+
+

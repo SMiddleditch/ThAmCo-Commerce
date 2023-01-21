@@ -1,0 +1,60 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Delete product";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete conformation - @Model.ProductName</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img class="border-info rounded" style="max-width: 140px" style="max-hight: 140px" id="ProductPictureUrlPreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductPictureUrl" class="control-label"></label>
+                    <input asp-for="ProductPictureUrl" class="form-control" readonly />
+                    <span asp-validation-for="ProductPictureUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductName" class="control-label"></label>
+                    <input asp-for="ProductName" class="form-control" readonly />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductPrice" class="control-label"></label>
+                    <input asp-for="ProductPrice" class="form-control" readonly />
+                    <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductStock" class="control-label"></label>
+                    <input asp-for="ProductStock" class="form-control" readonly />
+                    <span asp-validation-for="ProductStock" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <form asp-action="DeleteConformation">
+                        <input type="hidden" asp-for="Id"/>
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right"/>
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="Index">All Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProductPictureUrlPreview');
+            output.src = $("#ProductPictureUrl").val();
+        })
+    </script>
+}
+
+
+
