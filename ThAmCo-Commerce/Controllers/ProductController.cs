@@ -43,7 +43,7 @@ namespace ThAmCo_Commerce.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("ProductName,ProductPrice,ProductPictureUrl,ProductStock,Category")] Product product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
@@ -71,12 +71,13 @@ namespace ThAmCo_Commerce.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("ID, ProductName,ProductPrice,ProductPictureUrl,ProductStock")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, ProductName,ProductPrice,ProductPictureUrl,ProductStock,Category")] Product product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
+            product.Id = id;
             await _service.UpdateAsync(id, product);
             return RedirectToAction(nameof(Index));
         }
