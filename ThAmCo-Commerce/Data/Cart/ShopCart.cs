@@ -13,6 +13,18 @@ namespace ThAmCo_Commerce.Data.Cart
             _context = context;
         }
 
+        public static ShopCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = services.GetService<AppDbContext>();
+
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+
+            return new ShopCart(context) { ProductCartId = cartId };
+        }
+
+
         // Add product to the shopping cart
         public void AddProductToCart(Product product)
         {

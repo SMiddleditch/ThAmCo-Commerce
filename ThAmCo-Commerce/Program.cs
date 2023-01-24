@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using ThAmCo_Commerce.Data.Services;
+using ThAmCo_Commerce.Data.Cart;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,12 @@ builder.Services.AddControllersWithViews();
 
 // Add services
 builder.Services.AddScoped<IProductService, ProductService>();
+
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShopCart.GetShoppingCart(sc));
+
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -38,6 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
