@@ -8,7 +8,8 @@
     }
   },
   "profiles": {
-    "ThAmCo_Commerce": {
+
+    "ThAmCo_Commerce-Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchUrl": "Product",
@@ -16,6 +17,27 @@
       "applicationUrl": "https://localhost:7267;http://localhost:5297",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+
+    "ThAmCo_Commerce-Staging": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchUrl": "Product/Details/1",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7267;http://localhost:5297",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
+      }
+    },
+    "ThAmCo_Commerce-Production": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchUrl": "Product",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7267;http://localhost:5297",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {
