@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <img src="@item.ProductPictureUrl" width="100%" alt="@item.ProductName">
+                        <img src="@item.ProductPictureUrl" width="100%" height="300px" alt="@item.ProductName">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                         <div class="card-footer ">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right" asp-action="Details" asp-route-id="@item.Id">
+                        <a class="btn btn-outline-primary float-right" asp-controller="Order" asp-action="AddItem" asp-route-id="@item.Id">
                                 <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.ProductPrice.ToString("c"))</a>
                             </p>
                         </div>
@@ -80,7 +80,7 @@
     }
 </div>
 <div class="text-white">
-    <a asp-controler="Product" asp-action="Create" class="btn btn-success">
+    <a asp-controller="Product" asp-action="Create" class="btn btn-success">
         <i class="bi bi-plus"></i> Add New</a>
 
 </div>

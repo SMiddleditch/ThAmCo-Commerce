@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThAmCo_Commerce.Data.Services;
+using Moq;
 
 namespace ThAmCo_Commerce.Controllers.Tests
 {
     [TestClass()]
     public class ProductControllerTests
     {
+        Mock mockProductService = new Mock<IProductService>();
+        
         [TestMethod()]
         public void ProductControllerTest()
         {
@@ -32,7 +36,10 @@ namespace ThAmCo_Commerce.Controllers.Tests
         [TestMethod()]
         public void CreateTest()
         {
-            Assert.Fail();
+            var productController = new ProductController((IProductService)mockProductService.Object);
+            var result = productController.Create();
+
+            Assert.IsNotNull(result);
         }
 
         [TestMethod()]
@@ -44,7 +51,10 @@ namespace ThAmCo_Commerce.Controllers.Tests
         [TestMethod()]
         public void DetailsTest()
         {
-            Assert.Fail();
+            var productController = new ProductController((IProductService)mockProductService.Object);
+            var result = productController.Details();
+
+            Assert.IsNotNull (result);
         }
 
         [TestMethod()]
