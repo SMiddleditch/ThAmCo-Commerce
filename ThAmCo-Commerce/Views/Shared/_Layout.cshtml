@@ -29,6 +29,24 @@
                         <input name="searchString" type="text" class="form-control" placeholder="Search Product's'">
                         <button class="btn btn-outline-success m-2 my-sm-0" type="submit" style="padding-right:10px"><i class="bi bi-search"></i></button>
                     </form>
+
+                    <ul class="nav-bar">
+                        @await Component.InvokeAsync("ShopCartSummary")
+                        </ul>
+
+                    @*//////// User Profile*@
+                    <div class="dropdown">
+                        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false">
+                            <i class="bg bi-person-badge"></i> Hello user
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Order" asp-action="Index">
+                                    <i class="bg-info bi-list"></i> Orders
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 @*////////*@
             </div>

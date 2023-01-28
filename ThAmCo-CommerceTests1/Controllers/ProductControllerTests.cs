@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ThAmCo_Commerce.Data.Services;
 using Moq;
+using Microsoft.AspNetCore.Mvc;
+using ThAmCo_Commerce.Models;
 
 namespace ThAmCo_Commerce.Controllers.Tests
 {
@@ -51,10 +53,19 @@ namespace ThAmCo_Commerce.Controllers.Tests
         [TestMethod()]
         public void DetailsTest()
         {
-            var productController = new ProductController((IProductService)mockProductService.Object);
-            var result = productController.Details();
-
-            Assert.IsNotNull (result);
+            Product p = new Product();
+            p.ProductName = "Test";
+            Product p2 = null;
+            var mockProductService = new Mock<IProductService>();
+            mockProductService.Setup(x => x.GetByIdAsync(1))
+            .ReturnsAsync(p);
+            mockProductService.Setup(x => x.GetByIdAsync(2))
+            .ReturnsAsync(p2);
+            var controller = new ProductController(mockProductService.Object);
+            ViewResult? result = controller.Details(1).Result as ViewResult;
+            Assert.AreEqual(p, result.Model);
+            result = controller.Details(2).Result as ViewResult;
+            Assert.AreEqual("Empty", result.ViewName);
         }
 
         [TestMethod()]
