@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using ThAmCo_Commerce.Data.Static;
 using ThAmCo_Commerce.Models;
 
@@ -42,7 +41,7 @@ namespace ThAmCo_Commerce.Data
             {
 
                 //Roles Section
-                var roleManager = serviceScope.ServiceProvider.GetRequiredService< Microsoft.AspNetCore.Identity.RoleManager < IdentityRole >> ();
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -51,7 +50,7 @@ namespace ThAmCo_Commerce.Data
 
 
                 //Users
-                var userManager = serviceScope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<AppUser>>();
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
                 string adminEmail = "admin@test.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminEmail);
@@ -61,6 +60,7 @@ namespace ThAmCo_Commerce.Data
                     {
                         FullName = "Admin User",
                         UserName = "admin-user",
+                        Id = "testID",
                         Email = adminEmail,
                         EmailConfirmed = true
                     };
@@ -78,6 +78,7 @@ namespace ThAmCo_Commerce.Data
                     {
                         FullName = "App User",
                         UserName = "app-user",
+                        Id = "UserTestID",
                         Email = userEmail,
                         EmailConfirmed = true
                     };
