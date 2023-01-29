@@ -12,7 +12,7 @@ using ThAmCo_Commerce.Data;
 namespace ThAmCoCommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230128040310_Identity-to-Db")]
+    [Migration("20230128142044_Identity-to-Db")]
     partial class IdentitytoDb
     {
         /// <inheritdoc />
