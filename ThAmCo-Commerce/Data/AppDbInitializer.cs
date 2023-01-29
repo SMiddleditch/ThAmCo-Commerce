@@ -51,6 +51,7 @@ namespace ThAmCo_Commerce.Data
 
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+
                 string adminEmail = "admin@test.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminEmail);

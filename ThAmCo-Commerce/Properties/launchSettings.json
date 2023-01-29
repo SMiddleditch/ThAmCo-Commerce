@@ -12,7 +12,7 @@
     "ThAmCo_Commerce-Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchUrl": "Product",
+      "launchUrl": "Home",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7267;http://localhost:5297",
       "environmentVariables": {

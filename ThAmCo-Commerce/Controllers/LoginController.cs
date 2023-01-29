@@ -24,7 +24,7 @@ namespace ThAmCo_Commerce.Controllers
             return View(response); 
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             if(!ModelState.IsValid) return View(loginVM);
@@ -43,7 +43,48 @@ namespace ThAmCo_Commerce.Controllers
                 }
             }
 
-            TempData["Error"] = "You have entered email incorrectly or is does not exist";
+            TempData["Error"] = loginVM.EmailAddress;
+            return View(loginVM);
+
+        }*/
+        // Test
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM loginVM)
+        {
+            string debug;
+            if (!ModelState.IsValid) return View(loginVM);
+            debug = "1";
+            var user = await _userManager.FindByNameAsync(loginVM.EmailAddress);
+            debug = "2";
+            if (user != null)
+            {
+                debug = "3";
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+                if (passwordCheck)
+                {
+                    debug = "4";
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        debug = "5";
+                        return RedirectToAction("Index", "Product");
+                    }
+                    else
+                    {
+                        debug = "6";
+                    }
+                }
+                else
+                {
+                    debug = passwordCheck.ToString();
+                }
+            }
+            else
+            {
+                debug = "8";
+            }
+
+            TempData["Error"] = debug;
             return View(loginVM);
 
         }

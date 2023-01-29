@@ -26,17 +26,19 @@
                     </ul>
 
                     <form class="form-check-inline my-2 my-lg-0" asp-controller="Product" asp-action="Filter" style="padding-right: 30px;">
-                        <input name="searchString" type="text" class="form-control" placeholder="Search Product's'">
+                        <div class="input-group">
+                            <input name="searchString" type="text" class="form-control" placeholder="Search Product's'">
                         <button class="btn btn-outline-success m-2 my-sm-0" type="submit" style="padding-right:10px"><i class="bi bi-search"></i></button>
+                        </div>
                     </form>
 
-                    <ul class="nav-bar">
+                    <div class="nav-bar">
                         @await Component.InvokeAsync("ShopCartSummary")
-                        </ul>
+                        </div>
 
                     @*//////// User Profile*@
                         <a class="btn btn-outline-success my-2 my-sm-0" asp-controller="Login" asp-action="Login">
-                            <i class="bg-info bi-box-arrow-in-right"></i> Login
+                            <i class="bi-box-arrow-in-right"></i> Login
                         </a>
 
                     @*//////// User Profile*@
