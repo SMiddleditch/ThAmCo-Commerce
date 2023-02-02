@@ -34,6 +34,16 @@ namespace ThAmCo_Commerce.Controllers
             return View(allProducts);
         }
 
+        /// enum search
+        public async Task<IActionResult> Select(string category)
+        {
+            var allProducts = await _service.GetAllAsync();
+
+                var selectResult = allProducts.Where(n => n.Category.ToString().Equals(category)).ToList();
+                return View("Index", selectResult);         
+            
+        }
+
         /// Get Product's create
         public IActionResult Create()
         {

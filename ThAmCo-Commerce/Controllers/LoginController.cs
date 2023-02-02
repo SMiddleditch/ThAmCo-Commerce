@@ -18,10 +18,37 @@ namespace ThAmCo_Commerce.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-        public IActionResult Login() 
+        /*public IActionResult Login() 
         { 
             var response = new LoginVM();
             return View(response); 
+        }*/
+
+        public IActionResult Login() => View(new LoginVM());
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM loginVM)
+        {
+            if (!ModelState.IsValid) return View(loginVM);
+
+            var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
+            if (user != null)
+            {
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+                if (passwordCheck)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Product");
+                    }
+                }
+                TempData["Error"] = "Wrong credentials. Please, try again!";
+                return View(loginVM);
+            }
+
+            TempData["Error"] = "Wrong credentials. Please, try again!";
+            return View(loginVM);
         }
 
         /*[HttpPost]
@@ -48,7 +75,7 @@ namespace ThAmCo_Commerce.Controllers
 
         }*/
         // Test
-        [HttpPost]
+        /*[HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             string debug;
@@ -88,5 +115,6 @@ namespace ThAmCo_Commerce.Controllers
             return View(loginVM);
 
         }
+    }*/
     }
 }

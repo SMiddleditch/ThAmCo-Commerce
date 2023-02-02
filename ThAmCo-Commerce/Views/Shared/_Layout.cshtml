@@ -25,6 +25,16 @@
                             <a class="nav-link text.dark" asp-controller="Product" asp-action="Index"> <i class="badge-info bi-bag"></i>Product</a>
                     </ul>
 
+                    @*/// Enum search*@
+                    <form class="form-check-inline my-2 my-lg-0" asp-controller="Product" asp-action="Select" style="padding-right: 30px;">
+                        <div class="input-group">
+                            @using ThAmCo_Commerce.Data.Enums
+                            <select class="form-control" name="category" asp-items="Html.GetEnumValueSelectList<Category>()"></select>
+                            <button class="btn btn-outline-success m-2 my-sm-0" type="submit" style="padding-right:10px"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+
+                    @*/// search*@
                     <form class="form-check-inline my-2 my-lg-0" asp-controller="Product" asp-action="Filter" style="padding-right: 30px;">
                         <div class="input-group">
                             <input name="searchString" type="text" class="form-control" placeholder="Search Product's'">

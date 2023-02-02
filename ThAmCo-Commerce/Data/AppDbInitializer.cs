@@ -35,7 +35,7 @@ namespace ThAmCo_Commerce.Data
             }
         }
 
-        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        public static async Task SeedRoles_UsersAsync(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -61,7 +61,6 @@ namespace ThAmCo_Commerce.Data
                     {
                         FullName = "Admin User",
                         UserName = "admin-user",
-                        Id = "testID",
                         Email = adminEmail,
                         EmailConfirmed = true
                     };
@@ -79,7 +78,6 @@ namespace ThAmCo_Commerce.Data
                     {
                         FullName = "App User",
                         UserName = "app-user",
-                        Id = "UserTestID",
                         Email = userEmail,
                         EmailConfirmed = true
                     };
