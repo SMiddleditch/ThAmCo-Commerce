@@ -64,7 +64,9 @@ namespace ThAmCo_Commerce.Data
                         Email = adminEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAdminUser, "TestAdmin");
+                    // make entry into AspNetUser table
+                    await userManager.CreateAsync(newAdminUser, "TestAdmin1!");
+                    // make entry into AspNetUserRoles table
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
@@ -81,7 +83,7 @@ namespace ThAmCo_Commerce.Data
                         Email = userEmail,
                         EmailConfirmed = true
                     };
-                    await userManager.CreateAsync(newAppUser, "TestUser");
+                    await userManager.CreateAsync(newAppUser, "TestUser1!");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
 
 
