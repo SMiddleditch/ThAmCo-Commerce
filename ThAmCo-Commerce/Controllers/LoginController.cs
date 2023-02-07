@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using ThAmCo_Commerce.Data;
 using ThAmCo_Commerce.Data.ViewModels;
 using ThAmCo_Commerce.Models;
+using ThAmCo_Commerce.Data.Static;
+
 
 namespace ThAmCo_Commerce.Controllers
 {
@@ -24,7 +26,35 @@ namespace ThAmCo_Commerce.Controllers
             return View(response); 
         }*/
 
-        public IActionResult Login() => View(new LoginVM());
+        
+
+        public IActionResult Register() => View(new RegisterVM());
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid) return View(registerVM);
+            var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
+            if (user != null)
+            {
+                TempData["Error"] = "This Email adress already has an account";
+                return View(registerVM);
+            }
+
+            var newAccount = new AppUser()
+            {
+                FullName = registerVM.FullName,
+                Email = registerVM.EmailAddress,
+                UserName = registerVM.FullName
+            };
+            var newAccountResponse = await _userManager.CreateAsync(newAccount, registerVM.Password);
+
+            if (newAccountResponse.Succeeded)            
+                await _userManager.AddToRoleAsync(newAccount, UserRoles.User);
+            return View("AccountCreated");
+
+            
+        }
 
         // Test
         /*[HttpPost]
@@ -70,6 +100,7 @@ namespace ThAmCo_Commerce.Controllers
     }*/
         //}
 
+        public IActionResult Login() => View(new LoginVM());
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
@@ -88,12 +119,19 @@ namespace ThAmCo_Commerce.Controllers
                         return RedirectToAction("Index", "Product");
                     }
                 }
-                TempData["Error"] = "Wrong credentials. Please, try again!";
+                TempData["Error"] = "Incorrect Email or password, please try again!";
                 return View(loginVM);
             }
 
             TempData["Error"] = loginVM.EmailAddress;
             return View(loginVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Product");
         }
     }
 }

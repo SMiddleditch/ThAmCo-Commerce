@@ -12,8 +12,8 @@ using ThAmCo_Commerce.Data;
 namespace ThAmCoCommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230128142044_Identity-to-Db")]
-    partial class IdentitytoDb
+    [Migration("20230207035323_fix")]
+    partial class fix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

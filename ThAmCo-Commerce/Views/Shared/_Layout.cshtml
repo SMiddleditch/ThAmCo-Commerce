@@ -46,24 +46,8 @@
                         @await Component.InvokeAsync("ShopCartSummary")
                         </div>
 
-                    @*//////// User Profile*@
-                        <a class="btn btn-outline-success my-2 my-sm-0" asp-controller="Login" asp-action="Login">
-                            <i class="bi-box-arrow-in-right"></i> Login
-                        </a>
+                    <partial name="_Identity.cshtml"></partial>
 
-                    @*//////// User Profile*@
-                    <div class="dropdown">
-                        <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false">
-                            <i class="bg bi-person-badge"></i> Hello user
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="profile-btn">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Order" asp-action="Index">
-                                    <i class="bg-info bi-list"></i> Orders
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
                 @*////////*@
             </div>

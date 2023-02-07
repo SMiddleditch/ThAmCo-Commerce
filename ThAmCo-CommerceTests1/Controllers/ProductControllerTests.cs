@@ -89,6 +89,30 @@ namespace ThAmCo_Commerce.Controllers.Tests
             Assert.IsNotNull(result);
         }
 
+        [TestMethod]
+        public void DeleteTestConformation()
+        {
+            Product d1 = new Product();
+
+            var mockProductService = new Mock<IProductService>();
+
+            mockProductService.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(d1);
+            mockProductService.Setup(x => x.DeleteAsync(1)).Verifiable();
+
+            var controller = new ProductController(mockProductService.Object);
+
+            // now act           
+            // dot result is is to un wrap the result 
+            var result = controller.DeleteConformation(1).Result as RedirectToActionResult;
+
+
+            // now assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result.ActionName, "Index");
+
+
+        }
+
         [TestMethod()]
         public void DetailsTest()
         {
