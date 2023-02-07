@@ -5,7 +5,10 @@ namespace ThAmCo_Commerce.Data.Enums
     public enum Category
     {
         Shirt,
-        Pants
+        Pants,
+        Shoes,
+        Jackets,
+        Gloves
     }
     public static class ExtensionMethods
     {
